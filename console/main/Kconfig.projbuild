@@ -1,0 +1,43 @@
+menu "Console display"
+
+    config CONSOLE_LCD_PCLK_HZ
+        int "ST7789 SPI clock (Hz)"
+        range 10000000 80000000
+        default 40000000
+        help
+            GMT024-08-SPI8P often accepts 40 MHz. Raise toward 80 MHz if the
+            picture is stable and the frame rate is short of the target.
+
+    config CONSOLE_LCD_INVERT
+        bool "Invert ST7789 colors"
+        default y
+        help
+            IPS modules such as GMT024 usually need this on.
+
+    config CONSOLE_LCD_BGR
+        bool "Swap panel red and blue"
+        default n
+
+    config CONSOLE_LCD_BL_ON_LEVEL
+        int "Backlight on level"
+        range 0 1
+        default 1
+
+    choice CONSOLE_JPEG_ROTATE
+        prompt "Rotate decoded camera image"
+        default CONSOLE_JPEG_ROTATE_0
+        help
+            OV2640 JPEG QVGA is 240x320, which already fills this panel.
+            Use 90 or 270 when the sensor instead sends 320x240.
+
+        config CONSOLE_JPEG_ROTATE_0
+            bool "0"
+        config CONSOLE_JPEG_ROTATE_90
+            bool "90 clockwise"
+        config CONSOLE_JPEG_ROTATE_180
+            bool "180"
+        config CONSOLE_JPEG_ROTATE_270
+            bool "270 clockwise"
+    endchoice
+
+endmenu

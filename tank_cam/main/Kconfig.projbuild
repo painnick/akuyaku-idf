@@ -1,0 +1,11 @@
+menu "Tank camera"
+
+    config TANK_JPEG_QUALITY
+        int "JPEG quality (higher is smaller and rougher)"
+        range 10 63
+        default 36
+        help
+            esp32-camera scale. Start at 36. Raise toward 42 if the
+            console frame rate stays under the target.
+
+endmenu
